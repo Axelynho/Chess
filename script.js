@@ -3,7 +3,11 @@ let divFigure = '<div id ="f$coord" class="figure"> $figure</div>';
 $(function(){
     addSquares();
     showFigures('rnbqkbnrpppppppp11111111111111111111111111111111PPPPPPPPRNBQKBNR');
+    setDraggable();
 });
+function setDraggable(){
+    $('.figure').draggable();
+}
 function addSquares(){
     console.log('addSquares');
     $('.board').html('');
