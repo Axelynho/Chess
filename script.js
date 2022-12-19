@@ -4,10 +4,29 @@ $(function(){
     addSquares();
     showFigures('rnbqkbnrpppppppp11111111111111111111111111111111PPPPPPPPRNBQKBNR');
     setDraggable();
+    setDoppable();
 });
 function setDraggable(){
     $('.figure').draggable();
 }
+
+function setDoppable(){
+    $('.square').droppable({
+        drop: function(event,ui){
+           let fromCoord = ui.draggable.attr('id').substring(1);
+           let toCoord = this.id.substring(1);
+           moveFigure(fromCoord,toCoord);
+        }
+    });
+}
+
+function moveFigure(fromCoord,toCoord){
+    console.log('move from ' + fromCoord + ' to ' + toCoord);
+    figure = 'P';
+    showFigureAt(fromCoord,'1');
+    showFigureAt(toCoord,figure);
+}
+
 function addSquares(){
     console.log('addSquares');
     $('.board').html('');
