@@ -1,3 +1,4 @@
+let map;
 let divSquare = '<div id ="s$coord" class="square $color"></div>';
 let divFigure = '<div id ="f$coord" class="figure"> $figure</div>';
 $(function(){
@@ -30,7 +31,6 @@ function moveFigure(fromCoord,toCoord){
 }
 
 function addSquares(){
-    console.log('addSquares');
     $('.board').html('');
     for (let coord = 0; coord<64; coord++)
     $('.board').append(divSquare
