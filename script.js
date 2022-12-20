@@ -1,11 +1,13 @@
 let divSquare = '<div id ="s$coord" class="square $color"></div>';
 let divFigure = '<div id ="f$coord" class="figure"> $figure</div>';
 $(function(){
+    start();
+});
+function start(){
+    map = new Array(64);
     addSquares();
     showFigures('rnbqkbnrpppppppp11111111111111111111111111111111PPPPPPPPRNBQKBNR');
-    setDraggable();
-    setDoppable();
-});
+}
 function setDraggable(){
     $('.figure').draggable();
 }
@@ -22,7 +24,7 @@ function setDoppable(){
 
 function moveFigure(fromCoord,toCoord){
     console.log('move from ' + fromCoord + ' to ' + toCoord);
-    figure = 'P';
+    figure = map[fromCoord];
     showFigureAt(fromCoord,'1');
     showFigureAt(toCoord,figure);
 }
@@ -34,16 +36,20 @@ function addSquares(){
     $('.board').append(divSquare
         .replace('$coord',coord)
         .replace('$color',isBlackSquareAt(coord) ? 'black':'white'));
+            setDoppable();
 }
 function showFigures(figures){
     for (let coord = 0; coord<64; coord++)
-    showFigureAt(coord,figures.charAt(coord))
+    showFigureAt(coord,figures.charAt(coord));
+        setDraggable();
 }
 
 function showFigureAt(coord,figure){
+    map[coord]=figure;
     $('#s'+ coord).html(divFigure
         .replace('$coord',coord)
         .replace('$figure',getChessSymbole(figure)));
+            setDraggable();
 }
 
 function getChessSymbole(figure) {
